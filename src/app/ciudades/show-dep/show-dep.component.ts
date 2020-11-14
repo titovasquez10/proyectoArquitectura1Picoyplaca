@@ -16,6 +16,10 @@ export class ShowDepComponent implements OnInit {
   ActivateAddEditDepcomp:boolean=false;
   dep:any;
 
+  CiudadIdFilter:string="";
+  CiudadNombreFilter:string="";
+  CiudadListWithoutFilter:any=[];
+
   ngOnInit(): void {
     this.refreshDepList();
   }
@@ -34,6 +38,15 @@ export class ShowDepComponent implements OnInit {
     this.ModalTitle="Edit Ciudad"
     this.ActivateAddEditDepcomp=true;
   }
+  
+  deleteClick(item){
+    if(confirm('Are you sure?')){
+      this.service.deleteCiudad(item.CiudadId).subscribe(data=>{
+        alert(data.toString());
+        this.refreshDepList();
+      })
+    }
+  }
 
   closeClick(){
     this.ActivateAddEditDepcomp=false;
@@ -43,7 +56,33 @@ export class ShowDepComponent implements OnInit {
   refreshDepList(){
     this.service.getDepList().subscribe(data=>{
       this.CiudadList=data;
+      this.CiudadListWithoutFilter=data;
     });
+  }
+
+  FilterFn(){
+    var CiudadIdFilter = this.CiudadIdFilter;
+    var CiudadNombreFilter = this.CiudadNombreFilter;
+  
+
+    this.CiudadList = this.CiudadListWithoutFilter.filter(function (el){
+        return el.CiudadId.toString().toLowerCase().includes(
+          CiudadIdFilter.toString().trim().toLowerCase()
+        )&&
+        el.CiudadName.toString().toLowerCase().includes(
+          CiudadNombreFilter.toString().trim().toLowerCase()
+        )
+    });
+  }
+
+  sortResult(prop, asc){
+    this.CiudadList = this.CiudadListWithoutFilter.sort(function(a,b){
+      if (asc) {
+          return (a[prop]>b[prop])?1 : ((a[prop]<b[prop]) ?-1 :0);
+      }else{
+        return (b[prop]>a[prop])?1 : ((b[prop]<a[prop]) ?-1 :0);
+      }
+    })
   }
 
 }
