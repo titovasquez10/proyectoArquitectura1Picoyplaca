@@ -1,3 +1,5 @@
+El proyecto fue desarrollado por un equipo de estudiantes de ingeniería de sistemas VALENTINA VALDES CALERO Y TITO VASQUEZ MUCUA de la universidad Santiago de Cali en la materia de arquitectura de sistema de información el cual tuvo como iniciativa la creación de una aplicación web en la cual los usuarios puedan consultar su pico y placa de cualquier ciudad del país, inicialmente el usuario cuenta con campo de búsqueda donde puede consultar la ciudad o puede ingresar en el campo de búsqueda su digito final de la placa la cual la página le dará como resultado si ese día ingresado tendrá o no pico y placa.
+
 # FrontendApi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
